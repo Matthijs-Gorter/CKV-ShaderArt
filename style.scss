@@ -1,0 +1,158 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Serif:ital,opsz,wght@0,8..144,100..900;1,8..144,100..900&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap');
+
+html {
+    font-family: "Rubik", sans-serif;
+    width: 100vw;
+    box-sizing: border-box;
+    overflow-x: hidden;
+
+    body {
+        margin: 0;
+
+
+        #heroImage {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 50rem;
+            object-fit: cover;
+            z-index: -1;
+        }
+
+        header {
+            display: grid;
+            width: 100vw;
+            height: 50rem;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+
+            h1 {
+                margin: 0;
+                color: white;
+                width: min(50rem, 90vw);
+                border: 10px solid white;
+                font-size: 2.5rem;
+                text-align: center;
+                backdrop-filter: blur(0.2rem);
+                background-color: rgba(0, 0, 0, 0.3);
+                box-sizing: border-box;
+                padding: 2rem 4rem;
+            }
+
+            #info {
+                position: absolute;
+                left: 3rem;
+                bottom: 2rem;
+
+                p {
+                    font-size: 1.1rem;
+                    color: white !important;
+                }
+            }
+        }
+
+
+
+        main {
+            width: min(50rem, 90vw);
+            box-sizing: border-box;
+            margin: -5rem auto;
+            background-color: white;
+            padding: 2rem 4rem;
+        }
+
+        p {
+            font-size: 1.2rem;
+            color: rgb(51, 51, 51);
+        }
+
+        b {
+            color: rgb(0, 89, 223);
+        }
+
+        h2 {
+            font-size: 2rem;
+            color: rgb(0, 89, 223);
+        }
+
+        pre {
+            margin: 0 !important;
+        }
+        img {
+            width: 100%;
+        }
+        .caption {
+            color: #6b6b6b;
+        }
+        .code {
+            position: relative;
+
+            .filename {
+                z-index: 11;
+                position: absolute;
+                top: 0;
+                color: rgba(255, 255, 255, 0.7);
+                padding: 0 1.5rem;
+                line-height: 2.5rem;
+            }
+
+            .code-toolbar {
+                padding-top: 2.5rem !important;
+
+                .toolbar {
+
+
+                    background-color: #252525 !important;
+                    width: 100% !important;
+                    display: flex !important;
+                    justify-content: flex-end !important;
+                    gap: 1rem;
+                    height: 2.5rem !important;
+                    top: 0 !important;
+                    right: 0 !important;
+                    opacity: 1 !important;
+
+                    .toolbar-item {
+                        button:hover {
+                            span {
+                                background-color: white;
+                                color: rgb(0, 89, 223) !important;
+                            }
+                        }
+
+                        button {
+                            span {
+                                background-color: rgb(0, 89, 223);
+                                border: 2px solid rgb(0, 89, 223) !important;
+                            }
+                        }
+
+                        button,
+                        span {
+                            border-radius: 0 !important;
+                            margin: 0 !important;
+                            top: 0 !important;
+                            border: 0 !important;
+                            box-shadow: none !important;
+                            line-height: 2.5rem;
+                            padding: 0;
+
+                        }
+
+                        span {
+                            height: 2.5rem !important;
+                            display: block;
+                            text-align: center;
+                            padding: 0 1rem !important;
+                            color: white !important;
+                            box-sizing: border-box;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+

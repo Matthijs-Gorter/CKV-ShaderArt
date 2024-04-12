@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CKV - shaderArt</title>
+    <link href="prism.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/style.css">
+
+</head>
+
+<body class="line-numbers">
+    <img id="heroImage"
+        src="https://upload.wikimedia.org/wikipedia/commons/2/22/Physarum_polycephalum_Schwein_570529_crop.jpg" alt="">
+    <header id="parallaxHeader">
+        <H1>Hoe kun je kunst maken door Physarum te simuleren?</H1>
+        <div id="info">
+            <p><strong>Datum:</strong> 10-04-2024</p>
+            <p><strong>Vak:</strong> CKV</p>
+            <p><strong>Docent:</strong> S. Scholten</p>
+            <p><strong>Door:</strong> Matthijs Gorter</p>
+            <a href="https://commons.wikimedia.org/wiki/File:Physarum_polycephalum_Schwein_570529_crop.jpg"
+                style="color: white !important">
+                <p class="lead fs-6"><strong>Afbeelding:</strong> Bill Sheehan</p>
+            </a>
+        </div>
+    </header>
+    <main>
+        <h2>Code</h2>
+        <p>Ik begin door een 2D project in Unity te maken. Hier maak ik twee bestanden:</p>
+        <ol>
+            <li>
+                <p><b>AgentShader.compute</b> is een shaderbestand dat alle berekeningen op de grafische kaart uitvoert.
+                    De grafische kaart kan gelijktijdig veel processen uitvoeren, waardoor ik snel voor elke agent
+                    berekeningen kan uitvoeren in elke frame. De taken van dit bestand omvatten:</p>
+                <ol>
+                    <li>
+                        <p>Het berekenen van de richting van de agent.</p>
+                    </li>
+                    <li>
+                        <p>Het toepassen van kleureffecten op de agent.</p>
+                    </li>
+                    <li>
+                        <p>Het tekenen van de agent op een textuur.</p>
+                    </li>
+                </ol>
+            </li>
+            <li>
+                <p><b>AgentRenderer.cs</b> is een C#-script dat alle berekeningen op de processor uitvoert. Dit script
+                    wordt gebruikt om het programma te initialiseren en de agents te renderen. De taken van dit script
+                    zijn onder andere:</p>
+                <ol>
+                    <li>
+                        <p>Het initialiseren van de agents.</p>
+                    </li>
+                    <li>
+                        <p>Het sturen van informatie naar compute shaders.</p>
+                    </li>
+                    <li>
+                        <p>Het renderen van de textuur.</p>
+                    </li>
+                </ol>
+            </li>
+        </ol>
+        <p>Ik begin met het schrijven van de compute shader. Ik maak de structuur van een agent <code
+                class="language-hlsl">struct Agent</code> aan met daarin twee tweedimensionale vectoren <code
+                class="language-hlsl">float2</code>: de positie van de agent <code class="language-hlsl">position</code>
+            en de richting van de agent <code class="language-hlsl">direction</code>.</p>
+        <p>Ik maak ook twee variabelen om de afmetingen van het scherm te bepalen: <code
+                class="language-hlsl">int width</code> is de breedte van het scherm en <code
+                class="language-hlsl">int height</code> is de hoogte van het scherm.</p>
+        <p><code class="language-hlsl">RWStructuredBuffer agentsBuffer</code> is een lijst waarin alle informatie van de
+            agents staat. <code class="code language-hlsl">RWTexture2D Result;</code> is de afbeelding waarop ik alle
+            agents teken, die ik vervolgens render op het scherm.</p>
+        <p><code class="language-hlsl">[numthreads(1024, 1, 1)]</code>
+            Dit betekent dat de compute shader 1024 threads gebruikt, die allemaal tegelijkertijd kunnen worden
+            uitgevoerd. Dus nu kan ik voor 1024 agents tegelijkertijd de richting en positie berekenen.</p>
+        <p><code class="language-hlsl">Agent agent = agentsBuffer[id.x]; </code> Ik pak de agent een de agent lijst</p>
+        <p><code class="language-hlsl">agent.position += agent.direction;</code> Hier zet ik de agent een stapje verder
+            in zijn richting.</p>
+        <p><code class="language-hlsl">agentsBuffer[id.x] = agent;</code> Ik sla de bijgewerkte agent op de agent lijst
+        </p>
+        <p><code class="language-hlsl">Result[uint2(agent.position)] = float4(1,1,1,1);</code> Ik teken een witte
+            (1,1,1,1) pixel op de plek van de agent op de render-textuur.</p>
+        <p>Hier is de voledige code voor AgentShader.compute.</p>
+        <div class="code">
+            <span class="filename">AgentShader.compute</span>
+            <pre><code class="language-hlsl match-braces match-braces">struct Agent {
+    float2 position;    // De positie van de agent op het scherm
+    float2 direction;   // De richting waarin de agent beweegt
+};
+
+int width;             // Breedte van het scherm
+int height;            // Hoogte van het scherm
+
+RWStructuredBuffer&lt;Agent&gt; agentsBuffer;  // Buffer voor het opslaan van agentgegevens
+RWTexture2D&lt;float4&gt; Result;             // Textuur voor het renderen van agents
+
+[numthreads(1024, 1, 1)]
+void CSAgent (uint3 id : SV_DispatchThreadID)
+{
+    // Haal de agent op met het huidige ID uit de buffer
+    Agent agent = agentsBuffer[id.x]; 
+
+    // Update de positie van de agent op basis van de richting
+    agent.position += agent.direction;
+    
+    // Controleer of de agent buiten het scherm is en keer indien nodig de richting om
+    if (agent.position.x &lt; 0 || agent.position.x &gt;= width) {
+        agent.direction.x *= -1;
+    }
+    
+    if (agent.position.y &lt; 0 || agent.position.y &gt;= height) {
+        agent.direction.y *= -1;
+    }
+    
+    // Sla de bijgewerkte agent terug op in de buffer
+    agentsBuffer[id.x] = agent;
+    
+    // Teken de agent op de render-textuur
+    Result[uint2(agent.position)] = float4(1,1,1,1);
+    
+}</code></pre>
+        </div>
+        <p>Ik begin de simulatie met 1024 agents in het midden die een willeukige kant op kijken. Ik maak een
+            afbeelding wanneer agents bijna bij de rand zijn, die afbeelding is te zien in figuur 1.</p>
+        <img src="/images/figuur1.png" alt="">
+        <span class="caption">Figuur 1</span>
+        <br><br>
+        <p>Ik wil dat het spoor dat de agent achter laat langzaam vervaagt en verdwijnt. Dus maak ik een shader bestand waarin ik de render-textuur blur.</p>
+        <div class="code">
+            <span class="filename">BlurShader.compute</span>
+            <pre><code class="language-hlsl match-braces match-braces">RWTexture2D<float4> Result;
+
+[numthreads(32,32,1)]
+void CSBlur (uint3 id : SV_DispatchThreadID)
+{
+
+    float4 sum9pixel = 
+    Result[uint2(id.x - 1, id.y + 1)] + Result[uint2(id.x, id.y + 1)] + Result[uint2(id.x + 1, id.y + 1)] +
+    Result[uint2(id.x - 1, id.y    )] + Result[uint2(id.x, id.y    )] + Result[uint2(id.x + 1, id.y    )] +
+    Result[uint2(id.x - 1, id.y - 1)] + Result[uint2(id.x, id.y - 1)] + Result[uint2(id.x + 1, id.y - 1)];
+    Result[id.xy] = (sum9pixel / 9) * 1.0 + Result[id.xy] * 0 - 0.001;
+}
+</code></pre>
+        </div>
+        <img src="/images/figuur2.png" alt="">
+        <div style="height: 40vh;"></div>
+
+    </main>
+    <script src="/script.js"></script>
+    <script src="prism.js"></script>
+</body>
+
+</html>
