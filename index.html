@@ -128,7 +128,9 @@ void CSAgent (uint3 id : SV_DispatchThreadID)
         <img src="/images/figuur1.png" alt="">
         <span class="caption">Figuur 1</span>
         <br><br>
-        <p>Ik wil dat het spoor dat de agent achter laat langzaam vervaagt en verdwijnt. Dus maak ik een shader bestand waarin ik de render-textuur blur.</p>
+        <h3>Blur</h3>
+        <p>Ik wil dat het spoor dat de agent achter laat langzaam vervaagt en verdwijnt. Dus maak ik een shader bestand
+            "BlurShader.compute" waarin ik de render-textuur blur.</p>
         <div class="code">
             <span class="filename">BlurShader.compute</span>
             <pre><code class="language-hlsl match-braces match-braces">RWTexture2D<float4> Result;
@@ -146,7 +148,89 @@ void CSBlur (uint3 id : SV_DispatchThreadID)
 </code></pre>
         </div>
         <img src="/images/figuur2.png" alt="">
-        <div style="height: 40vh;"></div>
+        <h3>Richting van de agent bepalen</h3>
+        <img src="/images/figuur3.png" alt="">
+        <br><br>
+        <div class="code">
+            <span class="filename">BlurShader.compute</span>
+
+            <pre><code class="language-hlsl match-braces match-braces">int length = 10;
+float angle = 45;
+
+float2 pos = agent.position;
+
+for (int i = 0; i < length; i++) {
+    pos += agent.direction;
+    Result[uint2(pos)] = float4(1,0,0,1);
+}
+pos = agent.position;
+for (int i = 0; i < length; i++) {
+    pos += rotate(agent, angle);
+    Result[uint2(pos)] = float4(0, 0, 1, 1); // Set pixel color
+}
+pos = agent.position;
+for (int i = 0; i < length; i++) {
+    pos += rotate(agent, -angle);
+    Result[uint2(pos)] = float4(0, 1, 0, 1); // Set pixel color
+}</code></pre>
+            <br>
+            <div class="code">
+                <span class="filename">BlurShader.compute</span>
+
+                <pre><code class="language-hlsl match-braces match-braces">float2 rotate(Agent agent, float angle) {
+    float radians = angle * 3.14159f / 180.0f; // Convert angle to radians
+    return float2(
+        agent.direction.x * cos(radians) - agent.direction.y * sin(radians),
+        agent.direction.x * sin(radians) + agent.direction.y * cos(radians)
+    );
+}</code></pre>
+            </div>
+        </div>
+        <p>lente 10 pixel. hoek is 45 graden</p>
+        <img src="/images/figuur4.jpg" alt="">
+        <br><br>
+        <div class="code">
+            <span class="filename">BlurShader.compute</span>
+
+            <pre><code class="language-hlsl match-braces match-braces">int length = 20;
+float angle = 45;
+float rotateSpeed = 2;
+
+float2 pos = agent.position;
+
+float leftTotalLight = 0;
+float forwardTotalLight = 0;
+float rightTotalLight = 0;
+
+for (int i = 0; i < length; i++) {
+    pos += agent.direction;
+    forwardTotalLight += Result[uint2(pos)][0];
+}
+pos = agent.position;
+for (int i = 0; i < length; i++) {
+    pos += rotate(agent, angle);
+    leftTotalLight += Result[uint2(pos)][0];
+}
+pos = agent.position;
+for (int i = 0; i < length; i++) {
+    pos += rotate(agent, -angle);
+    rightTotalLight += Result[uint2(pos)][0];
+}
+
+if (leftTotalLight > max(forwardTotalLight, rightTotalLight)) {
+    agent.direction = rotate(agent, rotateSpeed);
+}
+if (rightTotalLight > max(leftTotalLight, forwardTotalLight)) {
+    agent.direction = rotate(agent, -rotateSpeed);
+}</code></pre>
+            <br>
+            <p>agent count 200. map grootte 256x256</p>
+            <img src="/images/figuur5.png" alt="">
+            <p>agent count 1024000. map grootte 2048x2048</p>
+            <img src="/images/figuur6.png" alt="">
+            <img src="/images/figuur7.png" alt="">
+
+            <div style="height: 40vh;"></div>
 
     </main>
     <script src="/script.js"></script>
