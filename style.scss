@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto+Serif:ital,opsz,wght@0,8..144,100..900;1,8..144,100..900&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Serif:ital,opsz,wght@0,8..144,100..900;1,8..144,100..900&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap");
 
 html {
     font-family: "Rubik", sans-serif;
@@ -80,8 +80,6 @@ html {
             }
         }
 
-
-
         main {
             width: min(50rem, 90vw);
             box-sizing: border-box;
@@ -93,10 +91,6 @@ html {
         p {
             font-size: 1.2rem;
             color: rgb(51, 51, 51);
-        }
-
-        b {
-            color: rgb(0, 89, 223);
         }
 
         h2 {
@@ -133,8 +127,6 @@ html {
                 padding-top: 2.5rem !important;
 
                 .toolbar {
-
-
                     background-color: #252525 !important;
                     width: 100% !important;
                     display: flex !important;
@@ -169,7 +161,6 @@ html {
                             box-shadow: none !important;
                             line-height: 2.5rem;
                             padding: 0;
-
                         }
 
                         span {
