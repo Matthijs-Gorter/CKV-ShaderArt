@@ -8,6 +8,32 @@ html {
 html body {
   margin: 0;
 }
+html body #overlay {
+  display: none;
+}
+html body #overlay.open {
+  display: block;
+  position: fixed;
+  cursor: zoom-out;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.3137254902);
+  -webkit-backdrop-filter: blur(2px);
+          backdrop-filter: blur(2px);
+  z-index: 12;
+}
+html body #expandedImage {
+  margin: 0 auto;
+  max-width: 97%;
+  max-height: 97%;
+  position: absolute;
+  cursor: zoom-out;
+  top: 50%;
+  left: 50%;
+  -o-object-fit: contain;
+     object-fit: contain;
+  transform: translate(-50%, -50%);
+}
 html body #heroImage {
   position: fixed;
   top: 0;
@@ -71,6 +97,7 @@ html body pre {
 }
 html body img {
   width: 100%;
+  cursor: zoom-in;
 }
 html body .caption {
   color: #6b6b6b;

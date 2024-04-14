@@ -11,6 +11,9 @@
 </head>
 
 <body class="line-numbers">
+    <div id="overlay" onclick="this.classList.remove('open')">
+        <img id="expandedImage" src="/images/figuur1.png" alt="">
+    </div>
     <img id="heroImage"
         src="https://upload.wikimedia.org/wikipedia/commons/2/22/Physarum_polycephalum_Schwein_570529_crop.jpg" alt="">
     <header id="parallaxHeader">
@@ -125,7 +128,7 @@ void CSAgent (uint3 id : SV_DispatchThreadID)
         </div>
         <p>Ik begin de simulatie met 1024 agents in het midden die een willeukige kant op kijken. Ik maak een
             afbeelding wanneer agents bijna bij de rand zijn, die afbeelding is te zien in figuur 1.</p>
-        <img src="/images/figuur1.png" alt="">
+        <img src="/images/figuur1.png" class="expandable-img" alt="">
         <span class="caption">Figuur 1</span>
         <br><br>
         <h3>Blur</h3>
@@ -147,9 +150,9 @@ void CSBlur (uint3 id : SV_DispatchThreadID)
 }
 </code></pre>
         </div>
-        <img src="/images/figuur2.png" alt="">
+        <img src="/images/figuur2.png" class="expandable-img" alt="">
         <h3>Richting van de agent bepalen</h3>
-        <img src="/images/figuur3.png" alt="">
+        <img src="/images/figuur3.png" class="expandable-img" alt="">
         <br><br>
         <div class="code">
             <span class="filename">BlurShader.compute</span>
@@ -187,7 +190,7 @@ for (int i = 0; i < length; i++) {
             </div>
         </div>
         <p>lente 10 pixel. hoek is 45 graden</p>
-        <img src="/images/figuur4.jpg" alt="">
+        <img src="/images/figuur4.jpg" class="expandable-img" alt="">
         <br><br>
         <div class="code">
             <span class="filename">BlurShader.compute</span>
@@ -225,10 +228,11 @@ if (rightTotalLight > max(leftTotalLight, forwardTotalLight)) {
 }</code></pre>
             <br>
             <p>agent count 200. map grootte 256x256</p>
-            <img src="/images/figuur5.png" alt="">
+            <img src="/images/figuur5.png" class="expandable-img" alt="">
             <p>agent count 1024000. map grootte 2048x2048</p>
-            <img src="/images/figuur6.png" alt="">
-            <img src="/images/figuur7.png" alt="">
+            <img src="/images/figuur6.png" class="expandable-img" alt="">
+            <img src="/images/figuur7.png" class="expandable-img" alt="">
+            <img src="/images/figuur8.png" class="expandable-img" alt="">
 
             <div style="height: 40vh;"></div>
 
