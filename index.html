@@ -36,9 +36,12 @@
         <main>
 
             <h2>Physarum</h2>
-            <p>Physarum is een soort slijmzwam, een eencellig organisme dat in vochtige omgevingen leeft zoals rottend
-                hout
-                of bladeren. Het heeft een unieke eigenschap genaamd 'pulsing', waarbij het zich uitbreidt en samentrekt
+            <p>Voor dit PO wou ik kunst maken op mijn computer. Ik zag <a href="https://youtu.be/X-iSQQgOd1A?si=AzvgQ-ignKfIRIKL&t=622">deze video</a> van Sebastian Lague. Ik wilde hetzelfde maken want het is niet alleen mooi
+                , maar zegt ook iets zegt over de natuur en hoe een organisme te simuleren is. Daarom koos ik voor Physarum. Ik wilde begrijpen hoe ik dat op
+                de computer kon nadoen om kunst te maken.
+            </p>
+            <p>Physarum is een eencellig organisme dat geen dier, plant of schimmel. Het leeft in vochtige omgevingen leeft zoals rottend
+                hout of bladeren. Het heeft een unieke eigenschap genaamd 'pulsing', waarbij het zich uitbreidt en samentrekt
                 wanneer het eet.</p>
 
             <h3>Doel van het onderzoek</h3>
@@ -386,12 +389,15 @@ if (rightTotalLight > max(leftTotalLight, forwardTotalLight)) {
                     <h3>Kleur</h3>
                     <p>Om het patroon van de simulatie intersanter te maken, voeg ik kleur toe aan elke agent op basis
                         van de richting waarin ze kijken. Wanneer een agent naar links kijkt, wordt deze paars gekleurd,
-                        en wanneer een agent naar rechts kijkt, wordt deze blauw. Ik vervang de ouwe code om een witte pixel te maken <code class="language-hlsl">Result[uint2(agent.position)] = float4(1,1,1,1);</code> met de onderstaande code.
+                        en wanneer een agent naar rechts kijkt, wordt deze blauw. Ik vervang de ouwe code om een witte
+                        pixel te maken <code
+                            class="language-hlsl">Result[uint2(agent.position)] = float4(1,1,1,1);</code> met de
+                        onderstaande code.
                     </p>
                     <div class="code">
                         <span class="filename">AgentShader.compute</span>
                         <pre><code class="language-hlsl match-braces match-braces">float angle = abs(atan2(agent.direction.y, agent.direction.x) / PI);
-Result[uint2(agent.position)] = float4(1,1-angle,angle,1);                          </code></pre>
+Result[uint2(agent.position)] = float4(1,1-angle,angle,1);</code></pre>
                     </div> <img src="/images/figuur8.png" class="expandable-img" alt="">
                     <!-- <video controls autoplay>
                     <source src="/images/figuur9.mp4" type="video/mp4">
