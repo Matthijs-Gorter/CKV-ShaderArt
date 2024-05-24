@@ -36,14 +36,16 @@
         <main>
 
             <h2>Physarum</h2>
-            <p>Voor dit PO wou ik kunst maken op mijn computer. Ik zag <a
+            <p>Voor dit PO wilde ik kunst maken op mijn computer. Ik zag <a
                     href="https://youtu.be/X-iSQQgOd1A?si=AzvgQ-ignKfIRIKL&t=622">deze video</a> van Sebastian Lague. Ik
                 wilde hetzelfde maken want het is niet alleen mooi
-                , maar zegt ook iets zegt over de natuur en hoe een organisme te simuleren is. Daarom koos ik voor
+                , maar het zegt ook iets zegt over de natuur en hoe een organisme te simuleren is. Daarom koos ik voor
                 Physarum. Ik wilde begrijpen hoe ik dat op
                 de computer kon nadoen om kunst te maken.
             </p>
-            <p>Physarum is een eencellig organisme dat geen dier, plant of schimmel. Het leeft in vochtige omgevingen
+            <p>Als jij dit ook wilt proberen ik heb alle simulaties in <a href="https://unity.com/">unity</a> gemaakt.
+            </p>
+            <p>Physarum is een eencellig organisme dat geen dier, plant of schimmel is. Het leeft in vochtige omgevingen
                 leeft zoals rottend
                 hout of bladeren. Het heeft een unieke eigenschap genaamd 'pulsing', waarbij het zich uitbreidt en
                 samentrekt
@@ -54,7 +56,7 @@
                 van
                 Physarum.</p>
 
-            <p>Dit onderzoek richt zich op het modelleren van de interacties tussen individuele deeltjes van Physarum in
+            <p>Dit onderzoek richt zich op het modelleren van de interacties tussen individuele cellen van Physarum in
                 een
                 simulatie</p>
 
@@ -71,14 +73,9 @@
                         <li>
                             <p>Draaisnelheid - hoe snel een agent zich kan omdraaien.</p>
                         </li>
-                        <li>
-                            <p>Zichtstraal - hoe ver de agent kan kijken.</p>
-                        </li>
                     </ul>
                 </li>
-                <li>
-                    <p>Hoe reageren verschillende soorten Physarum op elkaar?</p>
-                </li>
+
             </ul>
             <h2>Hypothese</h2>
             <p>Door het modelleren van de interacties tussen honderdduizenden individuele deeltjes (agents) van Physarum
@@ -395,12 +392,102 @@ Result[uint2(agent.position)] = float4(1,1-angle,angle,1);</code></pre>
                         staat in figuur 9</p>
                     <video controls autoplay>
                         <source src="/images/figuur9.mp4" type="video/mp4">
-                    </video> 
+                    </video>
                     <div class="caption">figuur 9</div>
             </section>
-            <h2></h2>
-            <div style="height: 40vh;"></div>
+            <h2>Deelvragen</h2>
+            <h3>Gezichtsveld en Draaisnelheid</h3>
+            <p>Om goed te kunnen visualiseren hoe het gezichtsveld en de draaisnelheid van een agent het patroon kunnen
+                beïnvloeden, heb ik een tabel gemaakt met 25 afbeeldingen van verschillende simulaties. In elke
+                simulatie zijn 512.000 agents op een kaart van 1024 bij 1024 pixels. Elke agent heeft een kijkafstand
+                van 30 pixels, terwijl het gezichtsveld en de draaisnelheid per simulatie verschillen. Deze tabel is te
+                zien in figuur 10 (de afbeelding vergroot als je erop klikt).</p>
+            <img src="/images/figuur10.png" class="expandable-img" alt="">
+            <div class="caption">figuur 10</div>
+            <p>In figuur 10 kun je zien dat bij een klein gezichtsveld er dunne lijnen ontstaan. Wanneer het
+                gezichtsveld groter is, worden de lijnen dikker en beslaat het patroon een groter deel van de simulatie.
+                Daarnaast is te zien dat bij een lagere draaisnelheid de agents zich meer verspreiden, terwijl ze bij
+                een hogere draaisnelheid dichter bij elkaar blijven.</p>
+            <h2>Kunst</h2>
+            <p>Om te kijken of ik hier kunst mee kan maken heb ik veel verschillende variable en kleuren geprobeert dit
+                creërden veel afbeeldingen hier zijn de beste: (elke afbeelding vergroot als je erop klikt).</p>
+                <img src="/images/figuur11.png" class="expandable-img" alt="">
+                <img src="/images/figuur12.png" class="expandable-img" alt="">
+                <img src="/images/figuur13.png" class="expandable-img" alt="">
+                <img src="/images/figuur14.png" class="expandable-img" alt="">
+                <img src="/images/figuur15.png" class="expandable-img" alt="">
+                <p>Ik heb een een twee soort Physarum toegevoegt om te kijken hoe ze met elkaar reageren.</p>
+                <img src="/images/figuur16.png" class="expandable-img" alt="">
+                <img src="/images/figuur17.png" class="expandable-img" alt="">
+                <img src="/images/figuur18.png" class="expandable-img" alt="">
+            <h2>Conclusie</h2>
+            <p>Dit project had als doel kunst te maken met een simulatie van het eencellige organisme Physarum. Door de
+                bewegingen en interacties van duizenden agents na te bootsen, kon ik mooie en interessante patronen
+                creëren.</p>
 
+            <p>Uit mijn onderzoek bleek dat verschillende factoren zoals het gezichtsveld (FoV) en
+                draaisnelheid van de agents de patronen sterk beïnvloeden. Agents met een groter gezichtsveld en hogere
+                draaisnelheid maakten bredere en meer verspreide patronen, terwijl een kleiner gezichtsveld en lagere
+                draaisnelheid zorgden voor meer geconcentreerde en gedetailleerde structuren.</p>
+
+            <p>Dit project laat zien dat je met eenvoudige regels en parameters complexe patronen kunt
+                creëren in een gesimuleerde omgeving. </p> <p>Maar of dit kunst is laat ik aan jouw over.</p>
+            <h2>Bronnen</h2>
+            <ul>
+                <li>
+                    <p>
+
+                        Lague, S. (2020). <i>Simulating a Slime Mold | Physarum Polycephalum | Sebastian Lague</i>
+                        [Video].
+                        YouTube. <a
+                            href="https://www.youtube.com/watch?v=X-iSQQgOd1A&t=622s&ab_channel=SebastianLague">https://www.youtube.com/watch?v=X-iSQQgOd1A&t=622s&ab_channel=SebastianLague</a>
+                    </p>
+                </li>
+                <li>
+                    <p>
+
+                        Jones, R. (2017). <i>Physarum Polycephalum: A Review of Recent Research</i>. UWE Research
+                        Repository. <a
+                            href="https://uwe-repository.worktribe.com/output/980579">https://uwe-repository.worktribe.com/output/980579</a>
+
+                    </p>
+                </li>
+                <li>
+                    <p>
+
+                        Wikipedia. (2023). <i>Physarum polycephalum</i>. <a
+                            href="https://nl.wikipedia.org/wiki/Physarum_polycephalum">https://nl.wikipedia.org/wiki/Physarum_polycephalum</a>
+
+                    </p>
+                </li>
+                <li>
+                    <p>
+
+                        De Groene Vinger. (2013). <i>Gele Massa</i>. <a
+                            href="https://degroenevinger.net/2013/11/12/gele-massa">https://degroenevinger.net/2013/11/12/gele-massa</a>
+
+                    </p>
+                </li>
+                <li>
+                    <p>
+
+                        Unity Technologies. (2023). <i>Compute Shaders</i>. Unity Documentation. <a
+                            href="https://docs.unity3d.com/Manual/class-ComputeShader.html">https://docs.unity3d.com/Manual/class-ComputeShader.html</a>
+
+                    </p>
+                </li>
+                <li>
+                    <p>
+
+                        Prism. (2023). <i>PrismJS Documentation</i>. <a
+                            href="https://prismjs.com/index.html">https://prismjs.com/index.html</a>
+
+                    </p>
+                </li>
+            </ul>
+
+
+            <div style="height: 40vh;"></div>
         </main>
     </div>
 
