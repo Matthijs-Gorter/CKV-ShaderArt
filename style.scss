@@ -1,7 +1,7 @@
-@import url("https://fonts.googleapis.com/css2?family=Roboto+Serif:ital,opsz,wght@0,8..144,100..900;1,8..144,100..900&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
 
 html {
-    font-family: "Rubik", sans-serif;
+    font-family: "Roboto", sans-serif;
     width: 100vw;
     box-sizing: border-box;
     overflow-x: hidden;
@@ -80,10 +80,90 @@ html {
             }
         }
 
+        #main-container {
+            * {
+
+                // outline: 1px solid red;
+            }
+
+            // position: absolute;
+            justify-content: center;
+            display: grid;
+            transform: translateX(-11rem);
+            grid-template-columns: 22rem min-content;
+
+
+        }
+
+        #toc-container {
+            margin: 0 0;
+            background-color: white;
+            box-sizing: border-box;
+            padding: 2rem 0rem 2rem 4rem;
+
+            nav {
+                position: sticky;
+                top: 2rem;
+
+                ul:not(li ul) {
+                    padding: 0;
+                }
+
+                li {
+                    padding-top: 0.5rem;
+                }
+
+                * {
+                    text-decoration: none;
+                    list-style-type: none;
+                }
+
+                a {
+                    color: black;
+
+                }
+
+                h2 {
+                    font-size: 2rem;
+                    color: rgb(0, 89, 223);
+                    padding-bottom: 0rem;
+                }
+
+                hr {
+                    // max-width: 15rem;
+                    // margin: 0 auto 0 0;
+                }
+
+            }
+
+            .toc-h2 {
+
+                padding-top: 1rem;
+                font-weight: bold;
+                ;
+                font-size: 1.3rem;
+                /* Adjust the font size as needed */
+            }
+
+            .toc-h3 {
+                font-weight: lighter;
+                ;
+
+                font-size: 1.1rem;
+                /* Adjust the font size as needed */
+            }
+
+            .toc-h4 {
+                font-size: 1.1rem;
+                /* Adjust the font size as needed */
+            }
+
+        }
+
         main {
             width: min(50rem, 90vw);
             box-sizing: border-box;
-            margin: -5rem auto;
+            margin: -5rem 0;
             background-color: white;
             padding: 2rem 4rem;
         }
@@ -98,8 +178,17 @@ html {
             color: rgb(0, 89, 223);
         }
 
+        h3 {
+            font-size: 1.3rem;
+        }
+
         pre {
             margin: 0 !important;
+        }
+
+        video {
+            width: 100%;
+
         }
 
         img {

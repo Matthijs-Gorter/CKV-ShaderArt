@@ -29,121 +29,147 @@
             </a>
         </div>
     </header>
-    <main>
-        <h2>Physarum</h2>
-        <p>Ik ga onderzoeken of een computer programma organische kunst kan maken. </p>
-        <h3>Deelvragen</h3>
-        <ul>
-            <li>
-                <p>Hoe beïnvloeden deze variabelen het patroon in een Physarum Simulatie?</p>
-            </li>
+    <div id="main-container">
+        <div id="toc-container">
+            <nav id="toc"></nav>
+        </div>
+        <main>
+
+            <h2>Physarum</h2>
+            <p>Physarum is een soort slijmzwam, een eencellig organisme dat in vochtige omgevingen leeft zoals rottend
+                hout
+                of bladeren. Het heeft een unieke eigenschap genaamd 'pulsing', waarbij het zich uitbreidt en samentrekt
+                wanneer het eet.</p>
+
+            <h3>Doel van het onderzoek</h3>
+            <p>Het doel van dit onderzoek is het begrijpen van hoe kunst kan worden gemaakt met behulp van een simulatie
+                van
+                Physarum.</p>
+
+            <p>Dit onderzoek richt zich op het modelleren van de interacties tussen individuele deeltjes van Physarum in
+                een
+                simulatie</p>
+
+            <h3>Deelvragen</h3>
             <ul>
                 <li>
-                    <p>Maps grootte - hoeveel pixels de map groot is.</p>
+                    <p>Hoe beïnvloeden deze variabelen het patroon in een Physarum-simulatie?</p>
+                    <ul>
+                        <li>
+                            <p>Mapgrootte - het aantal pixels in de map.</p>
+                        </li>
+                        <li>
+                            <p>Agenten per pixel - het aantal agenten in een pixel.</p>
+                        </li>
+                        <li>
+                            <p>Vervagingssnelheid - hoe snel het spoor dat de agent achterlaat vervaagt.</p>
+                        </li>
+                        <li>
+                            <p>Verdwijnsnelheid - hoe snel het spoor dat de agent achterlaat verdwijnt.</p>
+                        </li>
+                        <li>
+                            <p>FOV (field of view) - hoe breed de agent kan kijken.</p>
+                        </li>
+                        <li>
+                            <p>Stapgrootte - hoe groot de stap is die een agent elke frame zet.</p>
+                        </li>
+                        <li>
+                            <p>Draaisnelheid - hoe snel een agent zich kan omdraaien.</p>
+                        </li>
+                        <li>
+                            <p>Zichtstraal - hoe ver de agent kan kijken.</p>
+                        </li>
+                    </ul>
                 </li>
                 <li>
-                    <p>Agents* per pixel - hoeveel agenten er in een pixel zitten.</p>
-                </li>
-                <li>
-                    <p>Blur snelheid - Hoe snel het spoor dat de agent achter laat vervaagt wordt.</p>
-                </li>
-                <li>
-                    <p>Verdwijn snelheid - Hoe snel het spoor dat agent achter laat verdwijnt.</p>
-                </li>
-                <li>
-                    <p>FOV (field of view) - Hoe breed de agent kan kijken.</p>
-                </li>
-                <li>
-                    <p>Stap grootte - Hoe groot de stap is die een agent elke frame zet.</p>
-                </li>
-                <li>
-                    <p>Draai snelheid - Hoe snel een agent zich om kan draaien.</p>
-                </li>
-                <li>
-                    <p>Zichtstraal - Hoe ver de agent kan kijken.</p>
+                    <p>Hoe reageren verschillende soorten Physarum op elkaar?</p>
                 </li>
             </ul>
-            <li>
-                <p>Hoe reageren verschillende soorten Physarum met elkaar?</p>
-            </li>
-        </ul>
-        <h2>Hypothese</h2>
-        <p>Door het modelleren van de interacties tussen honderdduizenden individuele deeltjes (agents) van Physarum in
-            een simulatie, verwacht ik dat het mogelijk is om kunst te creëren. Ik pas de kleur van elke agent aan op
-            basis van de richting waarin deze zich beweegt. Hierdoor ontstaat er hopelijk een mooie afbeelding.
-            De grootte van de zichtstraal beïnvloedt waarschijnlijk de grootte van het patroon terwijl de draaisnelheid
-            de vorm van het patroon beïnvloedt.
-        </p>
-        <section>
-            <h2>Werkwijze</h2>
-            <p>Ik begin door een 2D project in Unity te maken. Hier maak ik twee bestanden:</p>
-            <ol>
-                <li>
-                    <p><b>AgentShader.compute</b> is een shaderbestand dat alle berekeningen op de grafische kaart
-                        uitvoert.
-                        De grafische kaart kan gelijktijdig veel processen uitvoeren, waardoor ik snel voor elke agent
-                        berekeningen kan uitvoeren in elke frame. De taken van dit bestand omvatten:</p>
-                    <ol>
-                        <li>
-                            <p>Het berekenen van de richting van de agent.</p>
-                        </li>
-                        <li>
-                            <p>Het toepassen van kleureffecten op de agent.</p>
-                        </li>
-                        <li>
-                            <p>Het tekenen van de agent op een textuur.</p>
-                        </li>
-                    </ol>
-                </li>
-                <li>
-                    <p><b>AgentRenderer.cs</b> is een C#-script dat alle berekeningen op de processor uitvoert. Dit
-                        script
-                        wordt gebruikt om het programma te initialiseren en de agents te renderen. De taken van dit
-                        script
-                        zijn onder andere:</p>
-                    <ol>
-                        <li>
-                            <p>Het initialiseren van de agents.</p>
-                        </li>
-                        <li>
-                            <p>Het sturen van informatie naar compute shaders.</p>
-                        </li>
-                        <li>
-                            <p>Het renderen van de textuur.</p>
-                        </li>
-                    </ol>
-                </li>
-            </ol>
-            <p>Ik begin met het schrijven van de compute shader. Ik maak de structuur van een agent <code
-                    class="language-hlsl">struct Agent</code> aan met daarin twee tweedimensionale vectoren <code
-                    class="language-hlsl">float2</code>: de positie van de agent <code
-                    class="language-hlsl">position</code>
-                en de richting van de agent <code class="language-hlsl">direction</code>.</p>
-            <p>Ik maak ook twee variabelen om de afmetingen van het scherm te bepalen: <code
-                    class="language-hlsl">int width</code> is de breedte van het scherm en <code
-                    class="language-hlsl">int height</code> is de hoogte van het scherm.</p>
-            <p><code class="language-hlsl">RWStructuredBuffer agentsBuffer</code> is een lijst waarin alle informatie
-                van de
-                agents staat. <code class="code language-hlsl">RWTexture2D Result;</code> is de afbeelding waarop ik
-                alle
-                agents teken, die ik vervolgens render op het scherm.</p>
-            <p><code class="language-hlsl">[numthreads(1024, 1, 1)]</code>
-                Dit betekent dat de compute shader 1024 threads gebruikt, die allemaal tegelijkertijd kunnen worden
-                uitgevoerd. Dus nu kan ik voor 1024 agents tegelijkertijd de richting en positie berekenen.</p>
-            <p><code class="language-hlsl">Agent agent = agentsBuffer[id.x]; </code> Ik pak de agent een de agent lijst
+            <h2>Hypothese</h2>
+            <p>Door het modelleren van de interacties tussen honderdduizenden individuele deeltjes (agents) van Physarum
+                in
+                een simulatie, verwacht ik dat het mogelijk is om kunst te creëren. Ik pas de kleur van elke agent aan
+                op
+                basis van de richting waarin deze zich beweegt. Hierdoor ontstaat er hopelijk een mooie afbeelding.
+                De grootte van de zichtstraal beïnvloedt waarschijnlijk de grootte van het patroon terwijl de
+                draaisnelheid
+                de vorm van het patroon beïnvloedt.
             </p>
-            <p><code class="language-hlsl">agent.position += agent.direction;</code> Hier zet ik de agent een stapje
-                verder
-                in zijn richting.</p>
-            <p><code class="language-hlsl">agentsBuffer[id.x] = agent;</code> Ik sla de bijgewerkte agent op de agent
-                lijst
-            </p>
-            <p><code class="language-hlsl">Result[uint2(agent.position)] = float4(1,1,1,1);</code> Ik teken een witte
-                (1,1,1,1) pixel op de plek van de agent op de render-textuur.</p>
-            <p>Hier is de voledige code voor AgentShader.compute.</p>
-            <div class="code">
-                <span class="filename">AgentShader.compute</span>
-                <pre><code class="language-hlsl match-braces match-braces">struct Agent {
+            <section>
+                <h2>Werkwijze</h2>
+                <p>Ik begin door een 2D project in Unity te maken. Hier maak ik twee bestanden:</p>
+                <ol>
+                    <li>
+                        <p><b>AgentShader.compute</b> is een shaderbestand dat alle berekeningen op de grafische kaart
+                            uitvoert.
+                            De grafische kaart kan gelijktijdig veel processen uitvoeren, waardoor ik snel voor elke
+                            agent
+                            berekeningen kan uitvoeren in elke frame. De taken van dit bestand omvatten:</p>
+                        <ol>
+                            <li>
+                                <p>Het berekenen van de richting van de agent.</p>
+                            </li>
+                            <li>
+                                <p>Het toepassen van kleureffecten op de agent.</p>
+                            </li>
+                            <li>
+                                <p>Het tekenen van de agent op een textuur.</p>
+                            </li>
+                        </ol>
+                    </li>
+                    <li>
+                        <p><b>AgentRenderer.cs</b> is een C#-script dat alle berekeningen op de processor uitvoert. Dit
+                            script
+                            wordt gebruikt om het programma te initialiseren en de agents te renderen. De taken van dit
+                            script
+                            zijn onder andere:</p>
+                        <ol>
+                            <li>
+                                <p>Het initialiseren van de agents.</p>
+                            </li>
+                            <li>
+                                <p>Het sturen van informatie naar compute shaders.</p>
+                            </li>
+                            <li>
+                                <p>Het renderen van de textuur.</p>
+                            </li>
+                        </ol>
+                    </li>
+                </ol>
+                <p>Ik begin met het schrijven van de compute shader. Ik maak de structuur van een agent <code
+                        class="language-hlsl">struct Agent</code> aan met daarin twee tweedimensionale vectoren <code
+                        class="language-hlsl">float2</code>: de positie van de agent <code
+                        class="language-hlsl">position</code>
+                    en de richting van de agent <code class="language-hlsl">direction</code>.</p>
+                <p>Ik maak ook twee variabelen om de afmetingen van het scherm te bepalen: <code
+                        class="language-hlsl">int width</code> is de breedte van het scherm en <code
+                        class="language-hlsl">int height</code> is de hoogte van het scherm.</p>
+                <p><code class="language-hlsl">RWStructuredBuffer agentsBuffer</code> is een lijst waarin alle
+                    informatie
+                    van de
+                    agents staat. <code class="code language-hlsl">RWTexture2D Result;</code> is de afbeelding waarop ik
+                    alle
+                    agents teken, die ik vervolgens render op het scherm.</p>
+                <p><code class="language-hlsl">[numthreads(1024, 1, 1)]</code>
+                    Dit betekent dat de compute shader 1024 threads gebruikt, die allemaal tegelijkertijd kunnen worden
+                    uitgevoerd. Dus nu kan ik voor 1024 agents tegelijkertijd de richting en positie berekenen.</p>
+                <p><code class="language-hlsl">Agent agent = agentsBuffer[id.x]; </code> Ik pak de agent een de agent
+                    lijst
+                </p>
+                <p><code class="language-hlsl">agent.position += agent.direction;</code> Hier zet ik de agent een stapje
+                    verder
+                    in zijn richting.</p>
+                <p><code class="language-hlsl">agentsBuffer[id.x] = agent;</code> Ik sla de bijgewerkte agent op de
+                    agent
+                    lijst
+                </p>
+                <p><code class="language-hlsl">Result[uint2(agent.position)] = float4(1,1,1,1);</code> Ik teken een
+                    witte
+                    (1,1,1,1) pixel op de plek van de agent op de render-textuur.</p>
+                <p>Hier is de voledige code voor AgentShader.compute.</p>
+                <div class="code">
+                    <span class="filename">AgentShader.compute</span>
+                    <pre><code class="language-hlsl match-braces match-braces">struct Agent {
     float2 position;    // De positie van de agent op het scherm
     float2 direction;   // De richting waarin de agent beweegt
 };
@@ -179,19 +205,25 @@ void CSAgent (uint3 id : SV_DispatchThreadID)
     Result[uint2(agent.position)] = float4(1,1,1,1);
     
 }</code></pre>
-            </div>
-            <p>Ik begin de simulatie met 1024 agents in het midden die een willeukige kant op kijken. Ik maak een
-                afbeelding wanneer agents bijna bij de rand zijn, die afbeelding is te zien in figuur 1.</p>
-            <img src="/images/figuur1.png" class="expandable-img" alt="">
-            <span class="caption">Figuur 1</span>
-            <br><br>
-            <h3>Blur</h3>
-            <p>Ik wil dat het spoor dat de agent achter laat langzaam vervaagt en verdwijnt. Dus maak ik een shader
-                bestand
-                "BlurShader.compute" waarin ik de render-textuur blur.</p>
-            <div class="code">
-                <span class="filename">BlurShader.compute</span>
-                <pre><code class="language-hlsl match-braces match-braces">RWTexture2D<float4> Result;
+                </div>
+                <p>Ik begin de simulatie met 1024 agents op een map van 512 bij 512 pixel. De agents beginnen in het
+                    midden die een willeukige kant op kijken. Dit neem ik
+                    op, die video is te zien in figuur 1.</p>
+                <video controls autoplay>
+                    <source src="/images/figuur1.mp4" type="video/mp4">
+                </video>
+                <span class="caption">Figuur 1</span>
+                <br><br>
+                <h3>Blur</h3>
+                <p>Om het spoor dat onze agent achterlaat langzaam te laten vervagen en verdwijnen, maak ik een
+                    shaderbestand genaamd "BlurShader.compute". In dit bestand maak ik een blureffect op de
+                    render-textuur. Dit wordt doe ik door elke pixel in elke frame gelijk te maken aan het gemiddelde
+                    van de negen omliggende pixels, inclusief zichzelf.</p>
+                <p>Hier is de voledige code voor BlurShader.compute.</p>
+
+                <div class="code">
+                    <span class="filename">BlurShader.compute</span>
+                    <pre><code class="language-hlsl match-braces match-braces">RWTexture2D<float4> Result;
 
 [numthreads(32,32,1)]
 void CSBlur (uint3 id : SV_DispatchThreadID)
@@ -201,18 +233,36 @@ void CSBlur (uint3 id : SV_DispatchThreadID)
     Result[uint2(id.x - 1, id.y + 1)] + Result[uint2(id.x, id.y + 1)] + Result[uint2(id.x + 1, id.y + 1)] +
     Result[uint2(id.x - 1, id.y    )] + Result[uint2(id.x, id.y    )] + Result[uint2(id.x + 1, id.y    )] +
     Result[uint2(id.x - 1, id.y - 1)] + Result[uint2(id.x, id.y - 1)] + Result[uint2(id.x + 1, id.y - 1)];
-    Result[id.xy] = (sum9pixel / 9) * 1.0 + Result[id.xy] * 0 - 0.001;
+    Result[id.xy] = (sum9pixel / 9) * 1.0 + Result[id.xy] * 0 - 0.005;
 }
 </code></pre>
-            </div>
-            <img src="/images/figuur2.png" class="expandable-img" alt="">
-            <h3>Richting van de agent bepalen</h3>
-            <img src="/images/figuur3.png" class="expandable-img" alt="">
-            <br><br>
-            <div class="code">
-                <span class="filename">BlurShader.compute</span>
+                    <p>Ik neem de zelfde simulatie op nu met het blur effect. Deze video is te zien in figuur 2.
+                    </p>
 
-                <pre><code class="language-hlsl match-braces match-braces">int length = 10;
+                </div>
+                <video controls autoplay>
+                    <source src="/images/figuur2.mp4" type="video/mp4">
+                </video>
+                <span class="caption">Figuur 2</span>
+
+                <h3>Richting van de agent bepalen</h3>
+                <p>Nu bewegen de agents willekeurig in een enkele richting. We willen echter dat
+                    elke agent zelfstandig kan bepalen welke richting hij moet volgen. Dit doet de agent door in drie
+                    richtingen te "kijken" en de hoeveelheid witte pixels in elke richting te evalueren. Als de linker
+                    kant de meeste witte pixels bevat, draait de agent naar links. Als de rechter kant de meeste witte
+                    pixels bevat, draait de agent naar rechts. Op deze manier volgen agents andere agents.
+                </p>
+                <p>In figuur 3 zijn twee agents afgebeeld. De rode lijnen geven de richtingen aan waarin ze kijken. De
+                    parameter a staat voor het gezichtsveld (Field of View, FoV), wat bepaalt hoe breed de agent kan
+                    kijken. L staat voor de lengte van de lijnen en bepaalt hoe ver de agent kan kijken.</p>
+                <img src="/images/figuur3.png" class="expandable-img" alt="">
+                <span class="caption">Figuur 3</span>
+                <br>
+                <p>De code hieronder tekent de drie zicht lijnen.</p>
+                <div class="code">
+                    <span class="filename">BlurShader.compute</span>
+
+                    <pre><code class="language-hlsl match-braces match-braces">int length = 10;
 float angle = 45;
 
 float2 pos = agent.position;
@@ -231,7 +281,19 @@ for (int i = 0; i < length; i++) {
     pos += rotate(agent, -angle);
     Result[uint2(pos)] = float4(0, 1, 0, 1); // Set pixel color
 }</code></pre>
+
+                </div>
+                <p>Ik maak een nieuwe simulatie met 5 agents, een map grootte van 1024 bij 1024 pixels. Elke agent heeft
+                    een kijkafstand (L) van 10 pixels en een gezichtsveld (a) van 45 graden. </p>
+                <video controls autoplay>
+                    <source src="/images/figuur4.mp4" type="video/mp4">
+                </video>
+                <span class="caption">Figuur 4</span>
                 <br>
+                <p>In de code staat een fuctie <code class="language-hlsl">float2 rotate</code> die de agent draait. De
+                    functie berekent de nieuwe richting van de agent op basis van een ouwe richting.
+                </p>
+
                 <div class="code">
                     <span class="filename">BlurShader.compute</span>
 
@@ -243,14 +305,13 @@ for (int i = 0; i < length; i++) {
     );
 }</code></pre>
                 </div>
-            </div>
-            <p>lente 10 pixel. hoek is 45 graden</p>
-            <img src="/images/figuur4.jpg" class="expandable-img" alt="">
-            <br><br>
-            <div class="code">
-                <span class="filename">BlurShader.compute</span>
+                <p>Hieronder zie je de code voor hoe de agents draaien met behulp van de <code
+                        class="language-hlsl">float2 rotate</code>
+                    functie, afhankelijk van wat ze "zien". Hier voeg ik een variabele toe draaisnelheid.</p>
+                <div class="code">
+                    <span class="filename">BlurShader.compute</span>
 
-                <pre><code class="language-hlsl match-braces match-braces">int length = 20;
+                    <pre><code class="language-hlsl match-braces match-braces">int length = 20;
 float angle = 45;
 float rotateSpeed = 2;
 
@@ -281,19 +342,53 @@ if (leftTotalLight > max(forwardTotalLight, rightTotalLight)) {
 if (rightTotalLight > max(leftTotalLight, forwardTotalLight)) {
     agent.direction = rotate(agent, -rotateSpeed);
 }</code></pre>
-                <br>
-                <p>agent count 200. map grootte 256x256</p>
-                <img src="/images/figuur5.png" class="expandable-img" alt="">
-                <p>agent count 1024000. map grootte 2048x2048</p>
-                <img src="/images/figuur6.png" class="expandable-img" alt="">
-                <img src="/images/figuur7.png" class="expandable-img" alt="">
-                <img src="/images/figuur8.png" class="expandable-img" alt="">
+                    <br>
+                    <p>Ik maak een nieuwe simulatie met 200 agent in een map van 256 bij 256 pixels. Elke agent heeft
+                        een kijkafstand van 20 pixels en een gezichtsveld van 45 graden en de draaisnelheid is 2 graden
+                        per frame. Figuur 5 is een opname
+                        van deze simulatie. </p>
+                    <video controls autoplay>
+                        <source src="/images/figuur5.mp4" type="video/mp4">
+                    </video>
+                    <div class="caption">Figuur 5</div>
+                    <p>Ik maak nu een groottere simulatie nu zijn er 1024000 agents in een map van 2048 bij 2048. Elke
+                        agent heeft
+                        een kijkafstand van 30 pixels en een gezichtsveld van 30 graden en de draaisnelheid is 1 graden
+                        per frame. Figuur 6
+                        is een opname van de simulatie.</p>
+                    <video controls autoplay>
+                        <source src="/images/figuur6.webm" type="video/mp4">
+                    </video>
+                    <span class="caption">Figuur 6</span>
+                    <h3>Pulsing</h3>
+                    <p>Physarum eencellige organisme beweegt en eet door zich ritmisch uit te zetten en samen te
+                        trekken.
+                        Deze pulserende bewegingen, aangedreven door interne drukveranderingen, helpen Physarum om
+                        voedingsstoffen op te nemen en zich efficiënt te verplaatsen. In figuur 7 is te zien hoe
+                        physarum dit doet.
 
-        </section>
-        <h2></h2>
-        <div style="height: 40vh;"></div>
+                    </p>
+                    <img src="/images/figuur7.gif" class="expandable-img" alt="">
+                    <span class="caption">Figuur 7</span>
+                    <br>
+                    <p>
+                        Om dit effect dit verandering ik de heletijd de draaisnelheid. Deze stel ik gelijk een sinus functie zodat hij afwisselt tussen snel en langzaam bewegen. De code hiervoor staat hieronder.
+                    </p>
+                    <div class="code">
+                        <pre><code class="language-hlsl">float rotateSpeed = 2 * (sin(120 * _Time) + 0.7) ;</code></pre>
+                    </div><br>
 
-    </main>
+                    <img src="/images/figuur8.png" class="expandable-img" alt="">
+                    <!-- <video controls autoplay>
+                    <source src="/images/figuur9.mp4" type="video/mp4">
+                </video> -->
+            </section>
+            <h2></h2>
+            <div style="height: 40vh;"></div>
+
+        </main>
+    </div>
+
     <script src="/script.js"></script>
     <script src="prism.js"></script>
 </body>
